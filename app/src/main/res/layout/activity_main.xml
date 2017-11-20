@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.joy.myfirebase.MainActivity">
+
+    <EditText
+        android:hint="Enter your email....."
+        android:id="@+id/edittext_email"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:hint="Enter your password....."
+        android:id="@+id/edittext_pass"
+        android:layout_margin="20dp"
+        android:padding="5dp"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_login"
+        android:textColor="#fff"
+        android:background="@color/colorPrimary"
+        android:layout_margin="20dp"
+        android:text="Sign UP"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_login1"
+        android:textColor="#fff"
+        android:background="@color/colorAccent"
+        android:layout_margin="20dp"
+        android:text="Sign In"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>
