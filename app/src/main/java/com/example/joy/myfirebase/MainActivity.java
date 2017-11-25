@@ -1,6 +1,7 @@
 package com.example.joy.myfirebase;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -17,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private EditText email,pass;
-    private Button signUP,signIN;
+    private Button signUP,signIN,passRecovery,passChange,emailChange;
     private ProgressDialog dialog;
     private FirebaseAuth auth;
 
@@ -31,9 +32,14 @@ public class MainActivity extends AppCompatActivity {
         pass = findViewById(R.id.edittext_pass);
         signUP = findViewById(R.id.btn_login);
         signIN = findViewById(R.id.btn_login1);
+        passRecovery=findViewById(R.id.btn_recovery);
+        passChange=findViewById(R.id.btn_change);
+        emailChange=findViewById(R.id.btn_email_change);
 
-        //----auth-------------------------
+
+        //----auth-----------------------------------
         auth = FirebaseAuth.getInstance();
+
 
         //----dialog------------------------
         dialog = new ProgressDialog(MainActivity.this);
@@ -48,13 +54,12 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 if (pass.getText().toString().length() < 6) {
-                    Toast.makeText(MainActivity.this, "Password's minimum lenth is 6", Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this, "Password's minimum length is 6", Toast.LENGTH_LONG).show();
                 } else if (email.getText().toString().isEmpty()) {
                     Toast.makeText(MainActivity.this, "Please fill up your email...", Toast.LENGTH_LONG).show();
                 } else {
 
                     dialog.show();
-
                     auth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString()).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -68,12 +73,9 @@ public class MainActivity extends AppCompatActivity {
 
                                 Toast.makeText(MainActivity.this, "Congratzzz ! Account created !", Toast.LENGTH_LONG).show();
                             }
-
                         }
                     });
-
                 }
-
             }
         });
 
@@ -88,8 +90,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 else {
-                    dialog.show();
 
+                    dialog.show();
                     auth.signInWithEmailAndPassword(email.getText().toString(), pass.getText().toString()).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -99,12 +101,34 @@ public class MainActivity extends AppCompatActivity {
 
                                 Toast.makeText(MainActivity.this, "Successfully Login !!  ", Toast.LENGTH_LONG).show();
                             }
-
                         }
                     });
 
                 }
 
+            }
+        });
+
+        passRecovery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this,RecoveryActivity.class));
+                
+            }
+        });
+        passChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this,PassChangeActivity.class));
+            }
+        });
+        emailChange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                startActivity(new Intent(MainActivity.this,EmailChangeActivity.class));
             }
         });
 
