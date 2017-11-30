@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
 
     private EditText email,pass;
-    private Button signUP,signIN,passRecovery,passChange,emailChange;
+    private Button signUP,signIN,passRecovery,passChange,emailChange,btnDB;
     private ProgressDialog dialog;
     private FirebaseAuth auth;
 
@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         passRecovery=findViewById(R.id.btn_recovery);
         passChange=findViewById(R.id.btn_change);
         emailChange=findViewById(R.id.btn_email_change);
+        btnDB=findViewById(R.id.btn_db);
+
 
 
         //----auth-----------------------------------
@@ -49,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         //-----onClick-----------------------------------
+        btnDB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this,DBActivity.class));
+            }
+        });
         signUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

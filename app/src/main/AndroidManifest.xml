@@ -20,7 +20,8 @@
         </activity>
         <activity android:name=".RecoveryActivity" />
         <activity android:name=".PassChangeActivity" />
-        <activity android:name=".EmailChangeActivity"></activity>
+        <activity android:name=".EmailChangeActivity" />
+        <activity android:name=".DBActivity"></activity>
     </application>
 
 </manifest>

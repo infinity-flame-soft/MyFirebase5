@@ -76,6 +76,17 @@
             android:textSize="20sp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/btn_db"
+            android:textColor="#fff"
+            android:textAllCaps="false"
+            android:background="@android:color/holo_green_dark"
+            android:layout_margin="20dp"
+            android:text="Database"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 
