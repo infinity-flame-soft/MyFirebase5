@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class DBActivity extends AppCompatActivity {
 
-    private Button addUSER;
+    private Button addUSER,updateUSER,deleteUser,retriveUSER;
     private EditText etName,etEmail,etContact;
     private FirebaseDatabase myDB;
     private DatabaseReference myRef;
@@ -35,20 +35,67 @@ public class DBActivity extends AppCompatActivity {
         etContact=findViewById(R.id.edittext_contact);
         etEmail=findViewById(R.id.edittext_email);
         etName=findViewById(R.id.edittext_name);
+        updateUSER=findViewById(R.id.btn_update_info);
+        deleteUser=findViewById(R.id.btn_delete_info);
+        retriveUSER=findViewById(R.id.btn_retrive_info);
 
         //-------firebase db init--------------
         myDB=FirebaseDatabase.getInstance();
         myRef=myDB.getReference("user");
 
 
+
+        retriveUSER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                myRef.child("-L-eiBzscSAI_TbDVR_F").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        UserModel model=dataSnapshot.getValue(UserModel.class);
+
+                        Log.d("USERS INFO","NAME: "+model.name+"  EMAIL: "+model.email+"   CONTACT: "+model.contact_no);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                        Toast.makeText(DBActivity.this,"CANCELLED!!",Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+            }
+        });
+        updateUSER.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                myRef.child("-L-eiBzscSAI_TbDVR_F").child("email").setValue(etEmail.getText().toString());
+
+            }
+        });
+        deleteUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                myRef.removeValue();
+
+            }
+        });
         addUSER.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 UserModel model=new UserModel(etName.getText().toString(),etEmail.getText().toString(),etContact.getText().toString());
 
+                String userID=myRef.push().getKey();
 
-                myRef.setValue(model).addOnFailureListener(new OnFailureListener() {
+
+                myRef.child(userID).setValue(model).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
 
